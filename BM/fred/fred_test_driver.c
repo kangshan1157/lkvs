@@ -43,11 +43,11 @@ static const struct file_operations fops = {
 
 static inline u64 fred_test_rdmsr(u32 msr)
 {
-        u32 a, d;
+	u32 a, d;
 
-        __asm__ __volatile__("rdmsr" : "=a"(a), "=d"(d) : "c"(msr) : "memory");
+	__asm__ __volatile__("rdmsr" : "=a"(a), "=d"(d) : "c"(msr) : "memory");
 
-        return a | ((u64) d << 32);
+	return a | ((u64) d << 32);
 }
 
 
@@ -69,9 +69,12 @@ static inline void fred_test_wrmsrns(u32 msr, u64 value)
 
 u64 read_performance_counter(void)
 {
-    u64 value;
-    rdpmcl(0x40000002, value);
-    printk(KERN_INFO "REF_TSC Value: %llu\n", value);
+	u64 value;
+
+	rdpmcl(0x40000002, value);
+
+	printk(KERN_INFO "REF_TSC Value: %llu\n", value);
+
 	return value;
 }
 
